@@ -9,13 +9,14 @@ my $localip = PVE::Cluster::remote_node_ip($nodename, 1);
 
 my $xline = '-' x 78;
 
+my $custom_welcome = '';
 
-if (-e /etc/pve/welcome.txt) {
-   open FILE /etc/pve/welcome.txt; 
-   my $custom_welcome = join "", <FILE>;
+if (-e ("/etc/pve/welcome.txt")) {
+   open FILE, "/etc/pve/welcome.txt"; 
+   $custom_welcome = join '', <FILE>;
    close FILE;
  } else {
-   my $custom_welcome = '';
+   $custom_welcome = '';
  }
 
 my $banner = '';
