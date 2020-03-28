@@ -9,6 +9,15 @@ my $localip = PVE::Cluster::remote_node_ip($nodename, 1);
 
 my $xline = '-' x 78;
 
+
+if (-e /etc/pve/welcome.txt) {
+   open FILE /etc/pve/welcome.txt; 
+   my $custom_welcome = join "", <FILE>;
+   close FILE;
+ } else {
+   my $custom_welcome = '';
+ }
+
 my $banner = '';
 
 if ($localip) {
@@ -20,6 +29,10 @@ Welcome to the Proxmox Virtual Environment. Please use your web browser to
 configure this server - connect to:
 
   https://${localip}:8006/
+
+$xline
+
+$custom_welcome
 
 $xline
 
